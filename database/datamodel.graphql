@@ -1,0 +1,121 @@
+enum UserRole {
+	ADMIN
+	MODERATOR
+	USER
+}
+
+enum OnlineStatus {
+	ONLINE
+	OFFLINE
+	AWAY
+	INVISBLE
+}
+
+type File {
+	id: ID! @unique
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	filename: String!
+	mimetype: String!
+	encoding: String!
+	key: String!
+	ETag: String!
+	url: String!
+}
+
+type Rating {
+	id: ID! @unique
+	vote: Int!
+	author: [User!]!
+}
+
+type Notification {
+	id: ID! @unique
+	message: String!
+	author: User!
+}
+
+type APIApplication {
+	id: ID! @unique
+	admin: User! @relation(name: "APIAdmin")
+	moderators: [User!]! @relation(name: "APIModerators")
+	name: String!
+	token: String!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+type User {
+	id: ID! @unique
+	email: String! @unique
+	API: [APIApplication!]! @relation(name: "UsersAPI")
+	notifications: [Notification!]!
+	set_private: Boolean! @default(value: true)
+	username: String! @unique
+	password: String!
+	avatar_url: File!
+	confirmed: Boolean! @default(value: false)
+	online: Boolean! @default(value: false)
+	friends: [User!]! @relation(name: "UserFriends")
+	friend_requests: [User!]! @relation(name: "UserFriendRequests")
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	role: UserRole!
+	teams: [Team!]! @relation(name: "TeamMembers")
+	channels: [Channel!]! @relation(name: "ChannelMembers")
+	owned_teams: [Team!]! @relation(name: "TeamAuthor")
+	owned_channels: [Channel!]! @relation(name: "AuthorChannel")
+}
+
+type Comment {
+	id: ID! @unique
+	body: String!
+	API: APIApplication!
+	parentId: ID!
+	url: String!
+	pageId: ID!
+	repliedTo: User @relation(name: "RepliedTo")
+	ratings: Rating!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	replies: [Comment!]! @relation(name: "CommentReplies", onDelete: CASCADE)
+	author: User! @relation(name: "CommentUser")
+}
+
+type Message {
+	id: ID! @unique
+	body: String!
+	parentId: ID!
+	url: String!
+	filetype: String!
+	author: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+type Channel {
+	id: ID! @unique
+	name: String!
+	slug: String!
+	moderators: [User!]! @relation(name: "ChannelModerators")
+	public: Boolean @default(value: true)
+	messages: [Message!]!
+	members: [User!]! @relation(name: "ChannelMembers")
+	author: User! @relation(name: "AuthorChannel")
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+type Team {
+	id: ID! @unique
+	name: String! @unique
+	slug: String!
+	moderators: [User!]! @relation(name: "TeamModerators")
+	author: User! @relation(name: "TeamAuthor")
+	members: [User!]! @relation(name: "TeamMembers")
+	channels: [Channel!]!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	confirmed: Boolean! @default(value: false)
+	online: Boolean! @default(value: false)
+}

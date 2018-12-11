@@ -1,0 +1,71 @@
+# import * from './generated/prisma.graphql"
+
+type User {
+	id: ID!
+	email: String!
+}
+
+type RegisterResponse {
+	ok: Boolean
+	sentEmailMessage: String
+	email: String
+}
+
+type CheckTokenResponse {
+	ok: Boolean
+	result: String
+}
+
+type ResetPasswordResponse {
+	ok: Boolean
+	result: String
+}
+
+type ForgotPasswordResponse {
+	ok: Boolean
+	sentEmailMessage: String
+	email: String
+}
+
+type ChangePasswordResponse {
+	ok: Boolean
+	result: String
+}
+
+type AuthConfirmationResponse {
+	ok: Boolean
+	result: String
+}
+
+type LoginResponse {
+	ok: Boolean
+	user: User
+	token: String
+	refreshToken: String
+}
+
+type Query {
+	me: String
+	fetchAPI: APIApplication
+}
+
+type Mutation {
+	register(
+		username: String!
+		password: String!
+		email: String!
+	): RegisterResponse
+	login(email: String!, password: String!, tokens: Boolean!): LoginResponse
+	checkToken(token: String!): CheckTokenResponse
+	resetPassword(id: ID!, password: String!): ResetPasswordResponse
+	forgotPassword(email: String!): ForgotPasswordResponse
+	changePassword(
+		email: String
+		oldPassword: String
+		newPassword: String
+	): ChangePasswordResponse
+	authConfirmation(token: String): AuthConfirmationResponse
+	logout: Boolean
+	createApi(name: String!): APIApplication
+	resetTokenAPI: APIApplication
+}

@@ -1,0 +1,47 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Scott\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add apollo-server-express aws-sdk bcryptjs compression copyfiles cross-env expres-session glob graphql graphql-code-generator graphql-import graphql-middleware graphql-redis-subscriptions graphql-shield graphql-tools helmet ioredis jsonwebtoken mime-types multiparty
+
+PATH: 
+  C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Go\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\vim\vim80;C:\Users\Scott\.cargo\bin;C:\Users\Scott\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\Scott\AppData\Local\Programs\Python\Python36\;C:\Users\Scott\AppData\Local\Microsoft\WindowsApps;C:\Users\Scott\AppData\Roaming\npm;C:\Users\Scott\go\bin;C:\Users\Scott\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  11.0.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/expres-session: Not found
+      at Request.params.callback [as _callback] (C:\Users\Scott\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:65894:18)
+      at Request.self.callback (C:\Users\Scott\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:129018:22)
+      at Request.emit (events.js:182:13)
+      at Request.<anonymous> (C:\Users\Scott\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:129990:10)
+      at Request.emit (events.js:182:13)
+      at IncomingMessage.<anonymous> (C:\Users\Scott\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:129912:12)
+      at Object.onceWrapper (events.js:273:13)
+      at IncomingMessage.emit (events.js:187:15)
+      at endReadableNT (_stream_readable.js:1094:12)
+      at process.internalTickCallback (internal/process/next_tick.js:72:19)
+
+npm manifest: 
+  {
+    "name": "AuthServer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
