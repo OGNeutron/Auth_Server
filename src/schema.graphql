@@ -45,7 +45,7 @@ type LoginResponse {
 }
 
 type Query {
-	me: String
+	me: User
 	fetchAPI: APIApplication
 }
 

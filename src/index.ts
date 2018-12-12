@@ -9,12 +9,15 @@ import { ApolloServer } from 'apollo-server-express';
 import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools';
 import { Prisma } from './generated/prisma-client';
+import { applyMiddleware } from 'graphql-middleware';
 import { redis } from './redis';
 dotenv.config();
 
 import { Context } from './types';
 import { genResolvers } from './utils/genSchema';
 import { middleware } from './middleware';
+// import { permissions } from './graphqlMiddleware/shield';
+import { graphqlMiddleware } from './graphqlMiddleware';
 
 const {
 	PORT = 4242,
@@ -31,12 +34,14 @@ export const PrismaDB = new Prisma({
 
 const typeDefs: string = importSchema(path.join(__dirname, './schema.graphql'));
 
-const schema = makeExecutableSchema({
+const makeSchema = makeExecutableSchema({
 	typeDefs,
 	resolvers: genResolvers()
 });
 
 const app = express();
+
+const { schema } = applyMiddleware(makeSchema, graphqlMiddleware);
 
 middleware(app);
 

@@ -7,6 +7,11 @@ import { INVALID_CREDENTIALS } from '../../constants';
 const { JWT_TOKEN_SECRET = 'secret' } = process.env;
 
 export const resolvers = {
+	Query: {
+		me(_: any, __: any, { db, session }: Context) {
+			return db.user({ id: session.userId });
+		}
+	},
 	Mutation: {
 		async checkToken(_: any, args: any, { db }: Context) {
 			try {
