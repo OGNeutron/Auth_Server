@@ -2,12 +2,7 @@ import { AuthenticationError, ApolloError } from 'apollo-server-express';
 import { comparePassword, logger, createToken } from 'scotts_utilities';
 
 import { Context } from '../../../types';
-import {
-	INVALID_CREDENTIALS,
-	ACCOUNT_NOT_CONFIRMED,
-	ALREADY_SIGNED_IN
-	// API_TOKEN_ERROR
-} from '../../../constants';
+import { INVALID_CREDENTIALS, ACCOUNT_NOT_CONFIRMED } from '../../../constants';
 import { removeAllUsersSessions } from '../../../utils';
 
 const { JWT_TOKEN_SECRET = 'secret' } = process.env;
@@ -78,12 +73,6 @@ export const resolvers = {
 				});
 
 				const user = searchUser[0];
-
-				if (session) {
-					if (session.userId === user.id) {
-						throw new ApolloError(ALREADY_SIGNED_IN);
-					}
-				}
 
 				if (user.confirmed) {
 					const valid = await comparePassword(

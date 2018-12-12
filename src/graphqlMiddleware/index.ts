@@ -8,6 +8,7 @@ const isAuthenticated = async (
 	context: any,
 	info: any
 ) => {
+	console.log(context);
 	if (!context.session.userId) {
 		// user is not logged in
 		throw new AuthenticationError(INVALID_CREDENTIALS);

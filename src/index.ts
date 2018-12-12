@@ -20,7 +20,7 @@ import { middleware } from './middleware';
 import { graphqlMiddleware } from './graphqlMiddleware';
 
 const {
-	PORT = 4242,
+	PORT = 4545,
 	MANAGEMENT_API_SECRET = 'randomsecret',
 	PRISMA_URL = 'http://localhost:4466/prismadb/dev',
 	NODE_ENV = 'development'

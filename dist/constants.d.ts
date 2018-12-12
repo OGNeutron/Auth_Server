@@ -1,0 +1,11 @@
+export declare const PORT: number;
+export declare const REDIS_PREFIX = "sess:";
+export declare const USER_SESSION_ID_PREFIX = "userSids:";
+export declare const FORGOT_PASSWORD_PREFIX = "forgotPassword:";
+export declare const INVALID_CREDENTIALS = "Invalid credentials";
+export declare const INCORECT_CREDENTIALS = "Incorrect credentials";
+export declare const EXPIRED_KEY_ERROR = "Session key has expired, please redo";
+export declare const PASSWORD_SUCCESSFULLY_CHANGED = "Password successfully changed";
+export declare const ACCOUNT_NOT_CONFIRMED = "Account has not activated please check your email";
+export declare const ALREADY_SIGNED_IN = "User is already signed in";
+export declare const API_TOKEN_ERROR = "API Token is needed";

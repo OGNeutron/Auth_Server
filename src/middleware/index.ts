@@ -6,6 +6,10 @@ import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as session from 'express-session';
 import * as passport from 'passport';
+import { redis } from '../redis';
+import { REDIS_PREFIX } from '../constants';
+
+const redisStore = require('connect-redis')(session);
 
 const { NODE_ENV = 'development', SESSION_SECRET = 'secret' } = process.env;
 
@@ -24,6 +28,10 @@ export const middleware = (app: Express) => {
 	app.use(express.urlencoded({ extended: true }));
 	app.use(
 		session({
+			store: new redisStore({
+				client: redis,
+				prefix: REDIS_PREFIX
+			}),
 			name: 'A_SERVER_SID',
 			secret: SESSION_SECRET,
 			saveUninitialized: false,
